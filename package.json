@@ -1,0 +1,29 @@
+{
+  "name": "balanced-binary-search-tree",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keegan-George/balanced-binary-search-tree.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Keegan-George/balanced-binary-search-tree/issues"
+  },
+  "homepage": "https://github.com/Keegan-George/balanced-binary-search-tree#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.29.7",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.10.0",
+    "globals": "^17.12.0",
+    "jest": "^30.5.1",
+    "prettier": "3.9.6"
+  }
+}
