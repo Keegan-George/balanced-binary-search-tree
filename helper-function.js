@@ -1,4 +1,4 @@
-function randomNumbersArray(length, min, max) {
+function randomIntsArray(length, min, max) {
   if (!Number.isInteger(min) || !Number.isInteger(max)) {
     throw new TypeError("Only integer inputs are supported.");
   }
@@ -8,4 +8,4 @@ function randomNumbersArray(length, min, max) {
   );
 }
 
-export { randomNumbersArray };
+export { randomIntsArray };
