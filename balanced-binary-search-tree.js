@@ -4,9 +4,10 @@ class Tree {
   }
 
   #buildTree(arr) {
-    const arrClean = [...new Set(arr.sort())];
+    const sorted = [...arr].sort((a, b) => a - b); // to not modify the original array
+    const normalized = [...new Set(sorted)];
 
-    return this.#createBST(arrClean, 0, arrClean.length - 1);
+    return this.#createBST(normalized, 0, normalized.length - 1);
   }
 
   #createBST(arr, start, end) {
@@ -71,6 +72,24 @@ class Tree {
         }
         current = current.right;
       }
+    }
+  }
+
+  depth(value) {
+    let current = this.root;
+    let edges = 0;
+
+    while (current) {
+      if (current.data === value) {
+        return edges;
+      }
+
+      if (value < current.data) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+      edges++;
     }
   }
 }
