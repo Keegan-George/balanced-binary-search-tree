@@ -23,6 +23,24 @@ class Tree {
     return root;
   }
 
+  #getNode(value) {
+    let current = this.root;
+
+    while (current) {
+      if (current.data === value) {
+        return current;
+      }
+
+      if (value < current.data) {
+        current = current.left;
+      } else {
+        current = current.right;
+      }
+    }
+
+    return null;
+  }
+
   prettyPrint(node = this.root, prefix = "", isLeft = true) {
     if (node === null || node === undefined) {
       return;
@@ -61,6 +79,18 @@ class Tree {
     }
   }
 
+  height(value) {
+    const node = this.#getNode(value);
+
+    if (!node) {
+      return -1;
+    }
+
+    return (
+      Math.max(this.height(node.left?.data), this.height(node.right?.data)) + 1
+    );
+  }
+
   depth(value) {
     let current = this.root;
     let edges = 0;
@@ -77,24 +107,6 @@ class Tree {
       }
       edges++;
     }
-  }
-
-  #getNode(value) {
-    let current = this.root;
-
-    while (current) {
-      if (current.data === value) {
-        return current;
-      }
-
-      if (value < current.data) {
-        current = current.left;
-      } else {
-        current = current.right;
-      }
-    }
-
-    return null;
   }
 }
 
