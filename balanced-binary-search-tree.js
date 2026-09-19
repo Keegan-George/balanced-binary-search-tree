@@ -83,11 +83,17 @@ class Tree {
     const node = this.#getNode(value);
 
     if (!node) {
-      return -1;
+      return;
     }
 
+    const height_left = this.height(node.left?.data);
+    const height_right = this.height(node.right?.data);
+
     return (
-      Math.max(this.height(node.left?.data), this.height(node.right?.data)) + 1
+      Math.max(
+        typeof height_left === "undefined" ? -1 : height_left,
+        typeof height_right === "undefined" ? -1 : height_right,
+      ) + 1
     );
   }
 

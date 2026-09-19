@@ -19,6 +19,18 @@ describe("Positive cases", () => {
     );
 
     test.each([
+      [1, 0],
+      [3, 1],
+      [5, 0],
+      [7, 2],
+      [9, 0],
+      [11, 1],
+      [13, 0],
+    ])("Return height of value in tree: height(%i) => %i", (n, expected) => {
+      expect(tree.height(n)).toBe(expected);
+    });
+
+    test.each([
       [1, 2],
       [3, 1],
       [5, 2],
@@ -34,26 +46,38 @@ describe("Positive cases", () => {
   describe("insert nodes", () => {
     test("Can insert new smallest value", () => {
       expect(tree.includes(0)).toBe(false);
+      expect(tree.height(0)).toBeUndefined();
       expect(tree.depth(0)).toBeUndefined();
+      expect(tree.height(1)).toBe(0);
       tree.insert(0);
       expect(tree.includes(0)).toBe(true);
+      expect(tree.height(0)).toBe(0);
       expect(tree.depth(0)).toBe(3);
+      expect(tree.height(1)).toBe(1);
     });
 
-    test("Can insert value in middle", () => {
+    test("Can insert middle value node", () => {
       expect(tree.includes(8)).toBe(false);
+      expect(tree.height(8)).toBeUndefined();
       expect(tree.depth(8)).toBeUndefined();
+      expect(tree.height(9)).toBe(0);
       tree.insert(8);
       expect(tree.includes(8)).toBe(true);
+      expect(tree.height(8)).toBe(0);
       expect(tree.depth(8)).toBe(3);
+      expect(tree.height(9)).toBe(1);
     });
 
     test("Can insert new largest value", () => {
       expect(tree.includes(15)).toBe(false);
+      expect(tree.height(15)).toBeUndefined();
       expect(tree.depth(15)).toBeUndefined();
+      expect(tree.height(13)).toBe(0);
       tree.insert(15);
+      expect(tree.height(15)).toBe(0);
       expect(tree.includes(15)).toBe(true);
       expect(tree.depth(15)).toBe(3);
+      expect(tree.height(13)).toBe(1);
     });
   });
 });
