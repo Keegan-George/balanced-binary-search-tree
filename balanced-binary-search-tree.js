@@ -114,6 +114,24 @@ class Tree {
       edges++;
     }
   }
+  isBalanced() {
+    return this.#subTreeHeight(this.root) !== false;
+  }
+
+  #subTreeHeight(node) {
+    if (!node) {
+      return -1;
+    }
+
+    const height_left = this.#subTreeHeight(node.left);
+    const height_right = this.#subTreeHeight(node.right);
+
+    //if subtree is balanced return its height
+    if (Math.abs(height_left - height_right) <= 1) {
+      return Math.max(height_left, height_right) + 1;
+    }
+    return false;
+  }
 }
 
 class Node {
@@ -124,4 +142,4 @@ class Node {
   }
 }
 
-export { Tree };
+export { Tree, Node };

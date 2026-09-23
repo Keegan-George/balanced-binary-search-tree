@@ -1,4 +1,4 @@
-import { Tree } from "./balanced-binary-search-tree";
+import { Tree, Node } from "./balanced-binary-search-tree";
 import { test, expect, describe, beforeEach } from "@jest/globals";
 
 let tree;
@@ -41,6 +41,10 @@ describe("Positive cases", () => {
     ])("Return depth of value in tree: depth(%i) => %i", (n, expected) => {
       expect(tree.depth(n)).toBe(expected);
     });
+
+    test("tree is balanced", () => {
+      expect(tree.isBalanced()).toBe(true);
+    });
   });
 
   describe("insert nodes", () => {
@@ -49,11 +53,13 @@ describe("Positive cases", () => {
       expect(tree.height(0)).toBeUndefined();
       expect(tree.depth(0)).toBeUndefined();
       expect(tree.height(1)).toBe(0);
+      expect(tree.isBalanced()).toBe(true);
       tree.insert(0);
       expect(tree.includes(0)).toBe(true);
       expect(tree.height(0)).toBe(0);
       expect(tree.depth(0)).toBe(3);
       expect(tree.height(1)).toBe(1);
+      expect(tree.isBalanced()).toBe(true);
     });
 
     test("Can insert middle value node", () => {
@@ -61,11 +67,13 @@ describe("Positive cases", () => {
       expect(tree.height(8)).toBeUndefined();
       expect(tree.depth(8)).toBeUndefined();
       expect(tree.height(9)).toBe(0);
+      expect(tree.isBalanced()).toBe(true);
       tree.insert(8);
       expect(tree.includes(8)).toBe(true);
       expect(tree.height(8)).toBe(0);
       expect(tree.depth(8)).toBe(3);
       expect(tree.height(9)).toBe(1);
+      expect(tree.isBalanced()).toBe(true);
     });
 
     test("Can insert new largest value", () => {
@@ -73,11 +81,39 @@ describe("Positive cases", () => {
       expect(tree.height(15)).toBeUndefined();
       expect(tree.depth(15)).toBeUndefined();
       expect(tree.height(13)).toBe(0);
+      expect(tree.isBalanced()).toBe(true);
       tree.insert(15);
       expect(tree.height(15)).toBe(0);
       expect(tree.includes(15)).toBe(true);
       expect(tree.depth(15)).toBe(3);
       expect(tree.height(13)).toBe(1);
+      expect(tree.isBalanced()).toBe(true);
     });
+  });
+});
+
+describe("Unbalanced tree scenarios", () => {
+  test("All nodes on left", () => {
+    const tree = new Tree([3]);
+    tree.root.left = new Node(2);
+    tree.root.left.left = new Node(1);
+    expect(tree.isBalanced()).toBe(false);
+  });
+
+  test("All nodes on right", () => {
+    const tree = new Tree([3]);
+    tree.root.right = new Node(2);
+    tree.root.right.right = new Node(1);
+    expect(tree.isBalanced()).toBe(false);
+  });
+
+  test("Subtree on left one node on right", () => {
+    const tree = new Tree([0]);
+    tree.root.left = new Node(1);
+    tree.root.right = new Node(2);
+    tree.root.left.left = new Node(3);
+    tree.root.left.right = new Node(4);
+    tree.root.left.left.left = new Node(5);
+    expect(tree.isBalanced()).toBe(false);
   });
 });
