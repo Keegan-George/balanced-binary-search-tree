@@ -114,17 +114,18 @@ class Tree {
       edges++;
     }
   }
+
   isBalanced() {
-    return this.#subTreeHeight(this.root) !== false;
+    return this.#balancedTreeHeight(this.root) !== false;
   }
 
-  #subTreeHeight(node) {
+  #balancedTreeHeight(node) {
     if (!node) {
       return -1;
     }
 
-    const height_left = this.#subTreeHeight(node.left);
-    const height_right = this.#subTreeHeight(node.right);
+    const height_left = this.#balancedTreeHeight(node.left);
+    const height_right = this.#balancedTreeHeight(node.right);
 
     //if subtree is balanced return its height
     if (Math.abs(height_left - height_right) <= 1) {
