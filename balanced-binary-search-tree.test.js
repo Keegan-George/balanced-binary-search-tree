@@ -1,4 +1,4 @@
-import { Tree, Node } from "./balanced-binary-search-tree";
+import { Tree } from "./balanced-binary-search-tree";
 import { test, expect, describe, beforeEach } from "@jest/globals";
 
 let tree;
@@ -95,25 +95,26 @@ describe("Positive cases", () => {
 describe("Unbalanced tree scenarios", () => {
   test("All nodes on left", () => {
     const tree = new Tree([3]);
-    tree.root.left = new Node(2);
-    tree.root.left.left = new Node(1);
+    tree.insert(2);
+    tree.insert(1);
     expect(tree.isBalanced()).toBe(false);
   });
 
   test("All nodes on right", () => {
     const tree = new Tree([3]);
-    tree.root.right = new Node(2);
-    tree.root.right.right = new Node(1);
+    tree.insert(2);
+    tree.insert(1);
     expect(tree.isBalanced()).toBe(false);
   });
 
-  test("Subtree on left one node on right", () => {
-    const tree = new Tree([0]);
-    tree.root.left = new Node(1);
-    tree.root.right = new Node(2);
-    tree.root.left.left = new Node(3);
-    tree.root.left.right = new Node(4);
-    tree.root.left.left.left = new Node(5);
+  test("tree of height 3 on left, one node on right", () => {
+    const tree = new Tree([6]);
+    tree.insert(4);
+    tree.insert(7);
+    tree.insert(3);
+    tree.insert(5);
+    tree.insert(1);
+    tree.insert(2);
     expect(tree.isBalanced()).toBe(false);
   });
 });
