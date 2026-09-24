@@ -128,7 +128,11 @@ class Tree {
     const height_right = this.#balancedTreeHeight(node.right);
 
     //if subtree is balanced return its height
-    if (Math.abs(height_left - height_right) <= 1) {
+    if (
+      height_left !== false &&
+      height_right !== false &&
+      Math.abs(height_left - height_right) <= 1
+    ) {
       return Math.max(height_left, height_right) + 1;
     }
     return false;
