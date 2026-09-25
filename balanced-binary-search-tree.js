@@ -109,13 +109,13 @@ class Tree {
       return;
     }
 
-    const height_left = this.height(node.left?.data);
-    const height_right = this.height(node.right?.data);
+    const heightLeft = this.height(node.left?.data);
+    const heightRight = this.height(node.right?.data);
 
     return (
       Math.max(
-        typeof height_left === "undefined" ? -1 : height_left,
-        typeof height_right === "undefined" ? -1 : height_right,
+        typeof heightLeft === "undefined" ? -1 : heightLeft,
+        typeof heightRight === "undefined" ? -1 : heightRight,
       ) + 1
     );
   }
@@ -147,16 +147,16 @@ class Tree {
       return -1;
     }
 
-    const height_left = this.#balancedTreeHeight(node.left);
-    const height_right = this.#balancedTreeHeight(node.right);
+    const heightLeft = this.#balancedTreeHeight(node.left);
+    const heightRight = this.#balancedTreeHeight(node.right);
 
     //if subtree is balanced return its height
     if (
-      height_left !== false &&
-      height_right !== false &&
-      Math.abs(height_left - height_right) <= 1
+      heightLeft !== false &&
+      heightRight !== false &&
+      Math.abs(heightLeft - heightRight) <= 1
     ) {
-      return Math.max(height_left, height_right) + 1;
+      return Math.max(heightLeft, heightRight) + 1;
     }
     return false;
   }
