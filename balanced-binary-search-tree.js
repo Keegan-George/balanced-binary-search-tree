@@ -79,6 +79,29 @@ class Tree {
     }
   }
 
+  levelOrderForEach(callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Valid callback function must be provided.");
+    }
+
+    const queue = [];
+    queue.push(this.root);
+
+    let current;
+    while (queue.length) {
+      current = queue.shift();
+      callback(current.data);
+
+      if (current.left) {
+        queue.push(current.left);
+      }
+
+      if (current.right) {
+        queue.push(current.right);
+      }
+    }
+  }
+
   height(value) {
     const node = this.#getNode(value);
 
@@ -147,4 +170,14 @@ class Node {
   }
 }
 
-export { Tree, Node };
+// const tree = new Tree([6]);
+// tree.insert(4);
+// tree.insert(7);
+// tree.insert(3);
+// tree.insert(5);
+// tree.insert(1);
+// tree.insert(2);
+// tree.prettyPrint();
+// tree.levelOrderForEach(console.log);
+
+export { Tree };
