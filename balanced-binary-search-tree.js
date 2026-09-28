@@ -102,6 +102,33 @@ class Tree {
     }
   }
 
+  levelOrderForEachRec(node, callback, queue = []) {
+    if (typeof callback !== "function") {
+      throw new Error("Valid callback function must be provided.");
+    }
+
+    if (node) {
+      queue.push(node);
+    }
+
+    if (queue.length === 0) {
+      return;
+    }
+
+    const current = queue.shift();
+    callback(current.data);
+
+    if (current.left) {
+      queue.push(current.left);
+    }
+
+    if (current.right) {
+      queue.push(current.right);
+    }
+
+    this.levelOrderForEachRec(undefined, callback, queue);
+  }
+
   height(value) {
     const node = this.#getNode(value);
 
@@ -170,14 +197,15 @@ class Node {
   }
 }
 
-// const tree = new Tree([6]);
-// tree.insert(4);
-// tree.insert(7);
-// tree.insert(3);
-// tree.insert(5);
-// tree.insert(1);
-// tree.insert(2);
-// tree.prettyPrint();
+const tree = new Tree([6]);
+tree.insert(4);
+tree.insert(7);
+tree.insert(3);
+tree.insert(5);
+tree.insert(1);
+tree.insert(2);
+tree.prettyPrint();
 // tree.levelOrderForEach(console.log);
+tree.levelOrderForEachRec(tree.root, console.log);
 
 export { Tree };
