@@ -90,6 +90,10 @@ describe("Positive cases", () => {
       expect(tree.isBalanced()).toBe(true);
     });
   });
+
+  describe("Tree traversal scenarios", () => {
+    describe("In order traversal", () => {});
+  });
 });
 
 describe("Unbalanced tree scenarios", () => {
