@@ -129,6 +129,21 @@ class Tree {
     this.levelOrderForEachRec(undefined, callback, queue);
   }
 
+  preOrderForEach(node, callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Valid callback function must be provided.");
+    }
+
+    if (node === null) {
+      return;
+    }
+
+    callback(node.data);
+
+    this.preOrderForEach(node.left, callback);
+    this.preOrderForEach(node.right, callback);
+  }
+
   height(value) {
     const node = this.#getNode(value);
 
@@ -205,7 +220,10 @@ tree.insert(5);
 tree.insert(1);
 tree.insert(2);
 tree.prettyPrint();
-// tree.levelOrderForEach(console.log);
+tree.levelOrderForEach(console.log);
+console.log("-");
 tree.levelOrderForEachRec(tree.root, console.log);
+console.log("-");
+tree.preOrderForEach(tree.root, console.log);
 
 export { Tree };
