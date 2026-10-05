@@ -144,6 +144,33 @@ class Tree {
     this.preOrderForEach(node.right, callback);
   }
 
+  inOrderForEach(node, callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Valid callback function must be provided.");
+    }
+    if (node === null) {
+      return;
+    }
+
+    this.inOrderForEach(node.left, callback);
+    callback(node.data);
+    this.inOrderForEach(node.right, callback);
+  }
+
+  postOrderForEach(node, callback) {
+    if (typeof callback !== "function") {
+      throw new Error("Valid callback function must be provided.");
+    }
+
+    if (node === null) {
+      return;
+    }
+
+    this.postOrderForEach(node.left, callback);
+    this.postOrderForEach(node.right, callback);
+    callback(node.data);
+  }
+
   height(value) {
     const node = this.#getNode(value);
 
@@ -220,10 +247,14 @@ tree.insert(5);
 tree.insert(1);
 tree.insert(2);
 tree.prettyPrint();
-tree.levelOrderForEach(console.log);
-console.log("-");
-tree.levelOrderForEachRec(tree.root, console.log);
-console.log("-");
-tree.preOrderForEach(tree.root, console.log);
+// tree.levelOrderForEach(console.log);
+// console.log("-");
+// tree.levelOrderForEachRec(tree.root, console.log);
+// console.log("-");
+// tree.preOrderForEach(tree.root, console.log);
+// console.log("-");
+// tree.inOrderForEach(tree.root, console.log);
+// console.log("-");
+// tree.postOrderForEach(tree.root, console.log);
 
 export { Tree };
