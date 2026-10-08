@@ -139,7 +139,6 @@ class Tree {
     }
 
     callback(node.data);
-
     this.preOrderForEach(node.left, callback);
     this.preOrderForEach(node.right, callback);
   }
@@ -238,23 +237,5 @@ class Node {
     this.right = null;
   }
 }
-
-const tree = new Tree([6]);
-tree.insert(4);
-tree.insert(7);
-tree.insert(3);
-tree.insert(5);
-tree.insert(1);
-tree.insert(2);
-tree.prettyPrint();
-// tree.levelOrderForEach(console.log);
-// console.log("-");
-// tree.levelOrderForEachRec(tree.root, console.log);
-// console.log("-");
-// tree.preOrderForEach(tree.root, console.log);
-// console.log("-");
-// tree.inOrderForEach(tree.root, console.log);
-// console.log("-");
-// tree.postOrderForEach(tree.root, console.log);
 
 export { Tree };
