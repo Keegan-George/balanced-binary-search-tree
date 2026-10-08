@@ -92,7 +92,50 @@ describe("Positive cases", () => {
   });
 
   describe("Tree traversal scenarios", () => {
-    describe("In order traversal", () => {});
+    test("Create array of node values in level order", () => {
+      const levelOrderArray = [];
+      tree.levelOrderForEach((n) => {
+        levelOrderArray.push(n);
+      });
+
+      expect(levelOrderArray).toEqual([7, 3, 11, 1, 5, 9, 13]);
+    });
+
+    test("Create array of node values in level order recursively", () => {
+      const levelOrderRecArray = [];
+      tree.levelOrderForEachRec(tree.root, (n) => {
+        levelOrderRecArray.push(n);
+      });
+
+      expect(levelOrderRecArray).toEqual([7, 3, 11, 1, 5, 9, 13]);
+    });
+
+    test("Create array of node values in-order", () => {
+      const inOrderArray = [];
+      tree.inOrderForEach(tree.root, (n) => {
+        inOrderArray.push(n);
+      });
+
+      expect(inOrderArray).toEqual([1, 3, 5, 7, 9, 11, 13]);
+    });
+
+    test("Create array of node values in pre-order", () => {
+      const preOrderArray = [];
+      tree.preOrderForEach(tree.root, (n) => {
+        preOrderArray.push(n);
+      });
+
+      expect(preOrderArray).toEqual([7, 3, 1, 5, 11, 9, 13]);
+    });
+
+    test("Create array of node values in post-order", () => {
+      const postOrderArray = [];
+      tree.postOrderForEach(tree.root, (n) => {
+        postOrderArray.push(n);
+      });
+
+      expect(postOrderArray).toEqual([1, 5, 3, 9, 13, 11, 7]);
+    });
   });
 });
 
