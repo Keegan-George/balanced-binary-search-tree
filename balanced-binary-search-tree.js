@@ -228,6 +228,12 @@ class Tree {
     }
     return false;
   }
+
+  rebalance() {
+    const levelOrderArray = [];
+    this.levelOrderForEach((n) => levelOrderArray.push(n));
+    this.root = this.#buildTree(levelOrderArray);
+  }
 }
 
 class Node {
