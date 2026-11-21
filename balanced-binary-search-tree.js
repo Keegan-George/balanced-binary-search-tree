@@ -79,6 +79,29 @@ class Tree {
     }
   }
 
+  deleteItem(value, node = this.root) {
+    if (!node) {
+      return null;
+    }
+
+    if (this.root.data === value) {
+      this.root = null;
+      return;
+    }
+
+    if (node.data === value) {
+      if (!node.left && !node.right) {
+        node = null;
+      }
+    } else if (value < node.data) {
+      node.left = this.deleteItem(value, node.left);
+    } else {
+      node.right = this.deleteItem(value, node.right);
+    }
+
+    return node;
+  }
+
   levelOrderForEach(callback) {
     if (typeof callback !== "function") {
       throw new Error("Valid callback function must be provided.");

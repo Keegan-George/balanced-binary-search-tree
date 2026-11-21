@@ -91,6 +91,67 @@ describe("Positive cases", () => {
     });
   });
 
+  describe("tree deletion", () => {
+    test("Can delete leaf root node", () => {
+      const tree = new Tree([2]);
+      expect(tree.includes(2)).toBe(true);
+      tree.deleteItem(2);
+      expect(tree.includes(2)).toBe(false);
+      expect(tree.root).toBeNull();
+    });
+
+    test("Delete single leaf node from two-node tree", () => {
+      const tree = new Tree([2, 3]);
+      tree.deleteItem(3);
+      expect(tree.includes(2)).toBe(true);
+      expect(tree.includes(3)).toBe(false);
+      expect(tree.root.left).toBeNull();
+      expect(tree.root.right).toBeNull();
+      tree.deleteItem(2);
+      expect(tree.includes(2)).toBe(false);
+      expect(tree.root).toBeNull();
+    });
+
+    test("Delete all nodes starting from leaves of three-node tree", () => {
+      const tree = new Tree([1, 2, 3]);
+      tree.deleteItem(1);
+      tree.deleteItem(3);
+      expect(tree.includes(1)).toBe(false);
+      expect(tree.includes(3)).toBe(false);
+      expect(tree.includes(2)).toBe(true);
+      expect(tree.root.left).toBeNull();
+      expect(tree.root.right).toBeNull();
+      tree.deleteItem(2);
+      expect(tree.includes(2)).toBe(false);
+      expect(tree.root).toBeNull();
+    });
+
+    test("Delete all nodes starting from leaves of seven-node tree", () => {
+      const tree = new Tree([1, 2, 3, 4, 5, 6, 7]);
+      tree.deleteItem(1);
+      tree.deleteItem(3);
+      tree.deleteItem(5);
+      tree.deleteItem(7);
+      expect(tree.includes(1)).toBe(false);
+      expect(tree.includes(3)).toBe(false);
+      expect(tree.includes(5)).toBe(false);
+      expect(tree.includes(7)).toBe(false);
+      expect(tree.includes(2)).toBe(true);
+      expect(tree.includes(4)).toBe(true);
+      expect(tree.includes(6)).toBe(true);
+      tree.deleteItem(2);
+      tree.deleteItem(6);
+      expect(tree.includes(2)).toBe(false);
+      expect(tree.includes(6)).toBe(false);
+      expect(tree.includes(4)).toBe(true);
+      expect(tree.root.left).toBeNull();
+      expect(tree.root.right).toBeNull();
+      tree.deleteItem(4);
+      expect(tree.includes(4)).toBe(false);
+      expect(tree.root).toBeNull();
+    });
+  });
+
   describe("Tree traversal", () => {
     test("Create array of node values in level order (non-recursively)", () => {
       const levelOrderArray = [];
