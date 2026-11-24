@@ -85,13 +85,23 @@ class Tree {
     }
 
     if (this.root.data === value) {
-      this.root = null;
+      if (!this.root.left && !this.root.right) {
+        this.root = null;
+      } else if (!this.root.left && this.root.right) {
+        this.root = this.root.right;
+      } else if (this.root.left && !this.root.right) {
+        this.root = this.root.left;
+      }
       return;
     }
 
     if (node.data === value) {
       if (!node.left && !node.right) {
         node = null;
+      } else if (!node.left && node.right) {
+        node = node.right;
+      } else if (node.left && !node.right) {
+        node = node.left;
       }
     } else if (value < node.data) {
       node.left = this.deleteItem(value, node.left);
